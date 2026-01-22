@@ -41,6 +41,50 @@ export default async function PostsListAdmin() {
           </div>
         );
       })}
+
+      <div
+        className={clsx(
+          "fixed inset-0 z-50 bg-black/50 backdrop-blur-xs",
+          "flex items-center justify-center",
+        )}
+      >
+        <div
+          className={clsx(
+            "bg-slate-900 p-6 rounded-lg max-w-xl mx-6",
+            "flex flex-col gap-6",
+            "shadow-lg shadow-black/50",
+          )}
+        >
+          <h3 className="text-xl">Excluir post?</h3>
+          <p className="text-slate-400">Essa ação não pode ser desfeita.</p>
+          <p>
+            Isso excluirá o post:{" "}
+            <span className="font-bold">Lorem ipsum dolor sit.</span>.
+          </p>
+          <div className="flex items-center gap-6 justify-end">
+            <button
+              className={clsx(
+                "bg-red-50 hover:bg-red-200 transition text-red-500",
+                "flex items-center justify-center",
+                "py-2 px-4 rounded-lg cursor-pointer",
+                "border border-red-300",
+              )}
+            >
+              Cancelar
+            </button>
+            <button
+              className={clsx(
+                "bg-green-50 hover:bg-green-200 transition text-green-500",
+                "flex items-center justify-center",
+                "py-2 px-4 rounded-lg cursor-pointer",
+                "border border-green-300",
+              )}
+            >
+              Excluir
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
