@@ -1,42 +1,71 @@
 "use client";
 
 import { deletePostAction } from "@/actions/post/delete-post-action";
+import { Dialog } from "@/components/Dialog";
 import clsx from "clsx";
 import { Trash2Icon } from "lucide-react";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 
 type DeletePostButtonProps = {
-  id: string;
-  title: string;
+  postId: string;
+  postTitle: string;
 };
 
-export function DeletePostButton({ id, title }: DeletePostButtonProps) {
+export function DeletePostButton({ postId, postTitle }: DeletePostButtonProps) {
   const [isPending, startTransition] = useTransition();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  function handleClick() {
-    if (!confirm("Tem certeza?")) return;
+  function openDialog() {
+    setIsDialogOpen(true);
+  }
 
+  function closeDialog() {
+    if (isPending) return;
+    setIsDialogOpen(false);
+  }
+
+  function confirmDelete() {
     startTransition(async () => {
-      const result = await deletePostAction(id);
+      const result = await deletePostAction(postId);
       alert(`O result é: ${result}`);
+      setIsDialogOpen(false);
     });
   }
 
   return (
-    <button
-      className={clsx(
-        "text-red-400 transition cursor-pointer",
-        "[&_svg]:w-4 [&_svg]:h-4",
-        "hover:text-red-500 hover:scale-110",
-        "opacity-70 group-hover:opacity-100",
-        "disabled:text-green-100 disabled:cursor-not-allowed disabled:hover:scale-100",
-      )}
-      aria-label={`Apagar post: ${title}`}
-      title={`Apagar post: ${title}`}
-      onClick={handleClick}
-      disabled={isPending}
-    >
-      <Trash2Icon />
-    </button>
+    <>
+      <button
+        className={clsx(
+          "text-red-400 transition cursor-pointer",
+          "[&_svg]:w-4 [&_svg]:h-4",
+          "hover:text-red-500 hover:scale-110",
+          "opacity-70 group-hover:opacity-100",
+          "disabled:text-green-100 disabled:cursor-not-allowed disabled:hover:scale-100",
+        )}
+        aria-label={`Excluir post: ${postTitle}`}
+        title={`Excluir post: ${postTitle}`}
+        onClick={openDialog}
+        disabled={isPending}
+      >
+        <Trash2Icon />
+      </button>
+
+      <Dialog
+        isOpen={isDialogOpen}
+        title="Excluir post?"
+        description="Essa ação não pode ser desfeita."
+        confirmLabel="Excluir"
+        cancelLabel="Cancelar"
+        onCancel={closeDialog}
+        onConfirm={confirmDelete}
+        isLoading={isPending}
+      >
+        <p>
+          O post{" "}
+          <span className="font-semibold text-green-300">{postTitle}</span> será
+          removido permanentemente.
+        </p>
+      </Dialog>
+    </>
   );
 }
