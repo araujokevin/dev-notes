@@ -7,9 +7,10 @@ export const metadata = {
 export default function NotFoundPage() {
   return (
     <ErrorMessage
-      contentTitle="404"
-      content="Erro 404 - A página que você está tentando acessar não existe neste
-            site."
+      variant="error"
+      pageTitle="Erro 404 | Página não encontrada"
+      title="404 — Página não encontrada"
+      description="A página que você está tentando acessar não existe ou foi removida."
     />
   );
 }
