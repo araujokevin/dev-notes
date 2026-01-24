@@ -9,11 +9,13 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function deletePostAction(id: string) {
-  await asyncDelay(2000);
+  await asyncDelay(1000);
   logColor(id);
 
-  if (!id) {
-    return { error: "Dados inválidos" };
+  if (!id || typeof id !== "string") {
+    return {
+      error: "Dados inválidos",
+    };
   }
 
   const post = await postRepository.findById(id).catch(() => undefined);
@@ -28,6 +30,7 @@ export async function deletePostAction(id: string) {
   revalidatePath("/admin/posts");
   revalidatePath("/posts");
   revalidatePath(`/posts/${post.slug}`);
+  revalidatePath("/");
 
   return { error: "" };
 }
