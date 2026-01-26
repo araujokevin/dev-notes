@@ -29,7 +29,7 @@ export async function deletePostAction(id: string) {
   // ✅ revalidação estável e sem erro de TS
   revalidatePath("/admin/posts");
   revalidatePath("/posts");
-  revalidatePath(`/posts/${post.slug}`);
+  revalidatePath(`/post/${post.slug}`);
   revalidatePath("/");
 
   return { error: "" };
