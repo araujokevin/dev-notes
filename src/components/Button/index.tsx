@@ -1,9 +1,8 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes } from "react";
 
 type ButtonVariant = "default" | "danger";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonProps = React.ComponentProps<"button"> & {
   variant?: ButtonVariant;
 };
 

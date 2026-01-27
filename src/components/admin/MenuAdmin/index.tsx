@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/Button";
 import clsx from "clsx";
 import {
   CircleXIcon,
@@ -39,16 +40,34 @@ export function MenuAdmin() {
 
   const toggleButtonClasses = clsx(
     itemBaseClasses,
-    "sm:hidden",
-    "font-medium",
-    "cursor-pointer",
+    "sm:hidden font-medium border-0",
   );
+
+  const menuItems = [
+    {
+      label: "Home",
+      href: "/",
+      icon: HouseIcon,
+      external: true,
+    },
+    {
+      label: "Posts",
+      href: "/admin/post",
+      icon: FileTextIcon,
+    },
+    {
+      label: "Criar post",
+      href: "/admin/post/new",
+      icon: PlusIcon,
+    },
+  ];
 
   return (
     <nav className={navClasses}>
       {/* Toggle mobile */}
-      <button
+      <Button
         type="button"
+        variant="default"
         onClick={() => setIsOpen((prev) => !prev)}
         className={toggleButtonClasses}
       >
@@ -63,31 +82,37 @@ export function MenuAdmin() {
             Menu
           </>
         )}
-      </button>
+      </Button>
 
       {/* Links */}
-      <a href="/" target="_blank" className={itemBaseClasses} rel="noreferrer">
-        <HouseIcon className="w-4 h-4" />
-        Home
-      </a>
+      {menuItems.map(({ label, href, icon: Icon, external }) => {
+        if (external) {
+          return (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className={itemBaseClasses}
+            >
+              <Icon className="w-4 h-4" />
+              {label}
+            </a>
+          );
+        }
 
-      <Link
-        href="/admin/post"
-        className={itemBaseClasses}
-        onClick={handleNavigate}
-      >
-        <FileTextIcon className="w-4 h-4" />
-        Posts
-      </Link>
-
-      <Link
-        href="/admin/post/new"
-        className={itemBaseClasses}
-        onClick={handleNavigate}
-      >
-        <PlusIcon className="w-4 h-4" />
-        Criar post
-      </Link>
+        return (
+          <Link
+            key={label}
+            href={href}
+            className={itemBaseClasses}
+            onClick={handleNavigate}
+          >
+            <Icon className="w-4 h-4" />
+            {label}
+          </Link>
+        );
+      })}
     </nav>
   );
 }
