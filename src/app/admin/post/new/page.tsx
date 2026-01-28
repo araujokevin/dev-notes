@@ -1,57 +1,12 @@
-import { InputCheckbox } from "@/components/InputCheckbox";
-import { InputText } from "@/components/InputText";
+import { ManagePostForm } from "@/components/ManagePostForm";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPostNewPage() {
   return (
-    <div className="my-8 flex flex-col gap-6">
-      <InputText
-        label="Nome"
-        placeholder="Digite seu nome"
-        type="password"
-        helperText="Use uma senha forte"
-      />
-
-      <InputText label="Sobrenome" placeholder="Digite seu sobrenome" />
-
-      <InputCheckbox
-        label="Publicar imediatamente"
-        helperText="O post ficará visível para todos"
-      />
-
-      <InputCheckbox
-        label="Aceitar termos"
-        error="Você precisa aceitar os termos para continuar"
-      />
-
-      <InputText
-        label="Sobrenome"
-        placeholder="Digite seu sobrenome"
-        defaultValue="Olá mundo"
-        disabled
-        helperText="Campo desabilitado"
-      />
-
-      <InputText
-        label="Sobrenome"
-        placeholder="Digite seu sobrenome"
-        disabled
-      />
-
-      <InputText
-        label="Sobrenome"
-        placeholder="Digite seu sobrenome"
-        readOnly
-        helperText="Campo somente leitura"
-      />
-
-      <InputText
-        label="Sobrenome"
-        placeholder="Digite seu sobrenome"
-        defaultValue="Olá mundo"
-        readOnly
-      />
-    </div>
+    <>
+      <h1>Criar post</h1>
+      <ManagePostForm />
+    </>
   );
 }
