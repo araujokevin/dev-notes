@@ -1,3 +1,4 @@
+import { InputCheckbox } from "@/components/InputCheckbox";
 import { InputText } from "@/components/InputText";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +14,16 @@ export default async function AdminPostNewPage() {
       />
 
       <InputText label="Sobrenome" placeholder="Digite seu sobrenome" />
+
+      <InputCheckbox
+        label="Publicar imediatamente"
+        helperText="O post ficará visível para todos"
+      />
+
+      <InputCheckbox
+        label="Aceitar termos"
+        error="Você precisa aceitar os termos para continuar"
+      />
 
       <InputText
         label="Sobrenome"
