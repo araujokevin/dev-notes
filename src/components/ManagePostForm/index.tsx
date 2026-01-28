@@ -5,6 +5,7 @@ import { Button } from "../Button";
 import { InputCheckbox } from "../InputCheckbox";
 import { InputText } from "../InputText";
 import { MarkdownEditor } from "../MarkdownEditor";
+import { ImageUploader } from "../ImageUploader";
 
 export function ManagePostForm() {
   const [contentValue, setContentValue] = useState("");
@@ -14,6 +15,11 @@ export function ManagePostForm() {
         <InputText label="Nome" placeholder="Digite seu nome" />
 
         <InputText label="Sobrenome" placeholder="Digite seu sobrenome" />
+
+        <ImageUploader
+          label="Imagem de capa"
+          helperText="Usada na listagem e no destaque do post"
+        />
 
         <InputCheckbox
           label="Publicar imediatamente"
