@@ -9,7 +9,7 @@ export function Footer() {
           href="/"
           className="text-green-300 hover:text-green-400 transition-colors"
         >
-          Dev Notes
+          The Dev Blog
         </Link>
       </p>
     </footer>
