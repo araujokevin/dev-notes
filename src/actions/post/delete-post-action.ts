@@ -9,6 +9,9 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function deletePostAction(id: string) {
+  // TODO: Checar login do usuário
+
+  // TODO: Checar linhas abaixo
   await asyncDelay(1000);
   logColor(id);
 

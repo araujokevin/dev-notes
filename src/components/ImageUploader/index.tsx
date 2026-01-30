@@ -3,9 +3,10 @@
 import clsx from "clsx";
 import { Button } from "@/components/Button";
 import { ImageUpIcon } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useTransition } from "react";
 import { IMAGE_UPLOAD_MAX_SIZE } from "@/lib/constants";
 import { toast } from "react-toastify";
+import { uploadImageAction } from "@/actions/upload/upload-image-action";
 
 type ImageUploaderProps = {
   label?: string;
@@ -23,6 +24,7 @@ export function ImageUploader({
   onChange,
 }: ImageUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, startTransition] = useTransition();
 
   function handleChooseFile() {
     if (disabled) return;
@@ -49,8 +51,9 @@ export function ImageUploader({
     const formData = new FormData();
     formData.append("file", file);
 
-    // TODO: Criar a action para upload do arquivo
-    console.log(formData.get("file"));
+    startTransition(async () => {
+      const result = await uploadImageAction();
+    });
 
     fileInput.value = "";
   }
